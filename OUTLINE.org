@@ -5,7 +5,12 @@
 
 ** NEXT [#A] Compreender o problema e esboçar as soluções sequencial e concorrente
    SCHEDULED: <2019-10-20 dom>
-   O programa 
+   Os elementos do programa consistem em:
+   * Uma função pro cálculo de áreas
+   * Funções que solucionem o problema (sequencial e concorrente)
+   * Funções que mapeiem as funções matemáticas
+   * Uma interface de interação com o usuário
+
 ** TODO [#B] Projetar as estruturas de dados e os algoritmos
    SCHEDULED: <2019-10-20 dom>
 
