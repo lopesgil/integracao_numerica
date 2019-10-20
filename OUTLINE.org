@@ -1,0 +1,19 @@
+#+TITLE: Trabalho de Integração Numérica
+#+TODO: TODO(t) NEXT(n) | DONE(d)
+
+* Etapas do trabalho
+
+** NEXT [#A] Compreender o problema e esboçar as soluções sequencial e concorrente
+   SCHEDULED: <2019-10-20 dom>
+   O programa 
+** TODO [#B] Projetar as estruturas de dados e os algoritmos
+   SCHEDULED: <2019-10-20 dom>
+
+** TODO Construir um conjunto de casos de teste e projetar a aplicação de teste
+
+** TODO Implementar as soluções, avaliar a corretude, refinar a implementação
+
+** TODO Avaliar o ganho de desempenho obtido com a versão concorrente
+
+** TODO Redigir o relatório e documentar os códigos
+
