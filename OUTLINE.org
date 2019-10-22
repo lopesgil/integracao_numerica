@@ -1,24 +1,28 @@
 #+TITLE: Trabalho de Integração Numérica
-#+TODO: TODO(t) NEXT(n) | DONE(d)
-
-* Etapas do trabalho
-
-** NEXT [#A] Compreender o problema e esboçar as soluções sequencial e concorrente
-   SCHEDULED: <2019-10-20 dom>
-   Os elementos do programa consistem em:
-   * Uma função pro cálculo de áreas
-   * Funções que solucionem o problema (sequencial e concorrente)
-   * Funções que mapeiem as funções matemáticas
-   * Uma interface de interação com o usuário
-
-** TODO [#B] Projetar as estruturas de dados e os algoritmos
-   SCHEDULED: <2019-10-20 dom>
-
-** TODO Construir um conjunto de casos de teste e projetar a aplicação de teste
-
-** TODO Implementar as soluções, avaliar a corretude, refinar a implementação
-
-** TODO Avaliar o ganho de desempenho obtido com a versão concorrente
-
-** TODO Redigir o relatório e documentar os códigos
-
+#+TODO: TODO(t) NEXT(n) NOW(w) | DONE(d)
+* NOW Tarefas [%]
+  DEADLINE: <2019-10-25 sex>
+** NOW Planejar a estrutura do projeto [50%]
+*** DONE Mapear as funções matemáticas em funções do C
+*** DONE Planejar o algoritmo sequencial do cálculo de área
+*** NEXT Planejar o algoritmo concorrente
+    SCHEDULED: <2019-10-22 ter>
+*** TODO Definir a interface de uso do programa
+    SCHEDULED: <2019-10-22 ter>
+** NEXT Programar as componentes do projeto [50%]
+*** DONE Implementar as funções matemáticas de teste
+*** DONE Implementar o algoritmo sequencial do cálculo de área
+*** NEXT Implementar o algoritmo concorrente
+    SCHEDULED: <2019-10-22 ter>
+*** TODO Implementar a interface de uso
+    SCHEDULED: <2019-10-22 ter>
+** TODO Testes, avaliações e relatório [0%]
+*** TODO Efetuar os testes e medições de tempo
+    SCHEDULED: <2019-10-23 qua>
+**** Se necessário, reavaliar a implementação
+*** TODO Avaliar o ganho obtido com a concorrência
+    SCHEDULED: <2019-10-23 qua>
+*** TODO Documentar o código
+    SCHEDULED: <2019-10-23 qua>
+*** TODO Redigir o relatório
+    SCHEDULED: <2019-10-23 qua>
