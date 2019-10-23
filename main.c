@@ -4,13 +4,14 @@
 #include "timer.h"
 #include "funcs.h"
 #include "inteseq.h"
+#include "inteconc.h"
 
 int main() {
   double resultado;
   double comeco, fim, tempo;
 
   GET_TIME(comeco);
-  resultado = integral_seq(-1, -9, 0.00000001, f_g);
+  resultado = integral_conc(1, 0, 3, 0.00000001, f_g);
   GET_TIME(fim);
   tempo = fim - comeco;
   printf("Resultado: %.5lf\n", resultado);
