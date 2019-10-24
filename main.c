@@ -11,12 +11,12 @@ int main() {
   double comeco, fim, tempo_concorrente, tempo_sequencial;
 
   GET_TIME(comeco);
-  resultado_conc = integral_conc(4, -10, 9, 0.000000001, f_g);
+  resultado_conc = integral_conc(4, -10, 20, 0.000000001, f_g);
   GET_TIME(fim);
   tempo_concorrente = fim - comeco;
 
   GET_TIME(comeco);
-  resultado_seq = integral_seq(-10, 9, 0.000000001, f_g);
+  resultado_seq = integral_seq(-10, 20, 0.000000001, f_g);
   GET_TIME(fim);
   tempo_sequencial = fim - comeco;
 

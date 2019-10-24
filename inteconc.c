@@ -24,31 +24,34 @@ pilha_t *p_tarefas;
 
 void *integra(void *arg) {
   int id = * (int *) arg;
+  int segurou = 0;
   tarefa_t t_in, t_l, t_r;
   double q, lq, rq, m, erro;
   double q_total = 0;
 
   while(1) {
-    pthread_mutex_lock(&m_pilha);
-    inativos++;
-    if(inativos == numThreads && p_vazia(p_tarefas)) {
-      pthread_cond_broadcast(&c_tamanho);
-      pthread_mutex_unlock(&m_pilha);
-      break;
-    }
+    if (!segurou) {
+      pthread_mutex_lock(&m_pilha);
+      inativos++;
+      if(inativos == numThreads && p_vazia(p_tarefas)) {
+        pthread_cond_broadcast(&c_tamanho);
+        pthread_mutex_unlock(&m_pilha);
+        break;
+      }
 
-    while(p_vazia(p_tarefas)) {
-      pthread_cond_wait(&c_tamanho, &m_pilha);
-      if(p_vazia(p_tarefas) && inativos == numThreads) break;
-    }
+      while(p_vazia(p_tarefas)) {
+        pthread_cond_wait(&c_tamanho, &m_pilha);
+        if(p_vazia(p_tarefas) && inativos == numThreads) break;
+      }
 
-    if (p_vazia(p_tarefas) && inativos == numThreads) {
+      if (p_vazia(p_tarefas) && inativos == numThreads) {
+        pthread_mutex_unlock(&m_pilha);
+        break;
+      }
+      t_in = p_retira(p_tarefas);
+      inativos--;
       pthread_mutex_unlock(&m_pilha);
-      break;
     }
-    t_in = p_retira(p_tarefas);
-    inativos--;
-    pthread_mutex_unlock(&m_pilha);
 
     q = t_in.area_maior;
     m = (t_in.l + t_in.r) / 2;
@@ -62,10 +65,12 @@ void *integra(void *arg) {
       t_r.area_maior = rq;
       pthread_mutex_lock(&m_pilha);
       p_insere(p_tarefas, t_l);
-      p_insere(p_tarefas, t_r);
+      t_in = t_r;
+      segurou = 1;
       pthread_mutex_unlock(&m_pilha);
       pthread_cond_broadcast(&c_tamanho);
     } else {
+      segurou = 0;
       q_total += q;
     }
   }
