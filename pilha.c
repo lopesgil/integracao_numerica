@@ -23,9 +23,7 @@ int p_vazia(pilha_t *p) {
 
 void p_insere(pilha_t *p, tarefa_t t) {
   if(p->tam == p->cap) p_cheia(p);
-  p->colecao[p->indice].area_maior = t.area_maior;
-  p->colecao[p->indice].l = t.l;
-  p->colecao[p->indice].r = t.r;
+  p->colecao[p->indice] = t;
   p->indice++;
   p->tam++;
 }
