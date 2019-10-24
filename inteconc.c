@@ -13,15 +13,18 @@ typedef struct inicio {
   double b;
   double (*f)(double);
 } dados_t;
+
 typedef struct tarefa {
   double l;
   double r;
   double area_maior;
 } tarefa_t;
+
 typedef struct no {
   tarefa_t t;
   struct no *proximo;
 } no_t;
+
 typedef struct pilha {
   no_t *topo;
   int tamanho;
@@ -32,21 +35,25 @@ void p_init (pilha_t **p) {
   (*p)->topo = NULL;
   (*p)->tamanho = 0;
 }
+
 int p_vazia(pilha_t **p) {
   return !((*p)->tamanho);
 }
+
 no_t *novo_no(tarefa_t t) {
   no_t *novo = (no_t *) malloc(sizeof(no_t));
   novo->proximo = NULL;
   novo->t = t;
   return novo;
 }
+
 void p_insere(pilha_t **p, tarefa_t t) {
   no_t *in = novo_no(t);
   in->proximo = (*p)->topo;
   (*p)->topo = in;
   (*p)->tamanho++;
 }
+
 tarefa_t p_retira(pilha_t **p) {
   tarefa_t t;
   if(p_vazia(p)) {
@@ -80,27 +87,28 @@ void *integra(void *arg) {
   double q, lq, rq, m, erro;
   double q_total = 0;
 
-  // printf("Thread %d iniciou\n", id);
   while(1) {
-    pthread_mutex_lock(&m_inativos);
-    inativos++;
     pthread_mutex_lock(&m_pilha);
-    if(inativos == numThreads && p_tarefas->tamanho == 0) {
+    inativos++;
+    if(inativos == numThreads && p_vazia(&p_tarefas)) {
+      pthread_cond_broadcast(&c_tamanho);
       pthread_mutex_unlock(&m_pilha);
-      pthread_mutex_unlock(&m_inativos);
       break;
     }
-    pthread_mutex_unlock(&m_pilha);
-    pthread_mutex_unlock(&m_inativos);
 
-    pthread_mutex_lock(&m_pilha);
-    while(p_tarefas->tamanho == 0) {
+    while(p_vazia(&p_tarefas)) {
+      /* printf("Thread %d: se bloqueou\n", id); */
       pthread_cond_wait(&c_tamanho, &m_pilha);
+      if(p_vazia(&p_tarefas) && inativos == numThreads) break;
+    }
+    /* printf("Thread %d: voltou\n", id); */
+
+    if (p_vazia(&p_tarefas) && inativos == numThreads) {
+      pthread_mutex_unlock(&m_pilha);
+      break;
     }
     t_in = p_retira(&p_tarefas);
-    pthread_mutex_lock(&m_inativos);
     inativos--;
-    pthread_mutex_unlock(&m_inativos);
     pthread_mutex_unlock(&m_pilha);
 
     q = t_in.area_maior;
@@ -119,6 +127,7 @@ void *integra(void *arg) {
       p_insere(&p_tarefas, t_l);
       p_insere(&p_tarefas, t_r);
       pthread_mutex_unlock(&m_pilha);
+      pthread_cond_broadcast(&c_tamanho);
     } else {
       q_total += q;
     }
@@ -128,6 +137,7 @@ void *integra(void *arg) {
   area_atual += q_total;
   pthread_mutex_unlock(&m_total);
 
+  free(arg);
   pthread_exit(NULL);
 }
 
@@ -144,9 +154,7 @@ double integral_conc(int nthreads, double a, double b, double e, double (*f)(dou
   //dados_iniciais.b = b;
   dados_iniciais.f = f;
 
-  // printf("Começo do programa\n");
   p_init(&p_tarefas);
-  // printf("Pilha de tarefas iniciada\n");
 
   numThreads = nthreads;
 
@@ -169,7 +177,7 @@ double integral_conc(int nthreads, double a, double b, double e, double (*f)(dou
 
   sys_tids = (pthread_t *) malloc(sizeof(pthread_t) * nthreads);
   for (t = 0; t < nthreads; t++) {
-    tid = malloc(sizeof(int));
+    tid = (int *) malloc(sizeof(int));
     *tid = t;
     if(pthread_create(&sys_tids[t], NULL, integra, (void *) tid)) exit(-1);
   }

@@ -2,19 +2,19 @@
 #+TODO: TODO(t) NEXT(n) NOW(w) | DONE(d)
 * NOW Tarefas [%]
   DEADLINE: <2019-10-25 sex>
-** NOW Planejar a estrutura do projeto [50%]
+** NOW Planejar a estrutura do projeto [75%]
 *** DONE Mapear as funções matemáticas em funções do C
 *** DONE Planejar o algoritmo sequencial do cálculo de área
-*** NOW Planejar o algoritmo concorrente
+*** DONE Planejar o algoritmo concorrente
+    CLOSED: [2019-10-23 qua 16:30] SCHEDULED: <2019-10-22 ter>
+*** NOW Definir a interface de uso do programa
     SCHEDULED: <2019-10-22 ter>
-*** TODO Definir a interface de uso do programa
-    SCHEDULED: <2019-10-22 ter>
-** NEXT Programar as componentes do projeto [50%]
+** NEXT Programar as componentes do projeto [75%]
 *** DONE Implementar as funções matemáticas de teste
 *** DONE Implementar o algoritmo sequencial do cálculo de área
-*** NEXT Implementar o algoritmo concorrente
-    SCHEDULED: <2019-10-22 ter>
-*** TODO Implementar a interface de uso
+*** DONE Implementar o algoritmo concorrente
+    CLOSED: [2019-10-23 qua 22:51] SCHEDULED: <2019-10-22 ter>
+*** NEXT Implementar a interface de uso
     SCHEDULED: <2019-10-22 ter>
 ** TODO Testes, avaliações e relatório [0%]
 *** TODO Efetuar os testes e medições de tempo
