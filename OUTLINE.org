@@ -7,20 +7,20 @@
 *** DONE Planejar o algoritmo sequencial do cálculo de área
 *** DONE Planejar o algoritmo concorrente
     CLOSED: [2019-10-23 qua 16:30] SCHEDULED: <2019-10-22 ter>
-*** NOW Definir a interface de uso do programa
+*** NOW [#A] Definir a interface de uso do programa
     SCHEDULED: <2019-10-22 ter>
 ** NEXT Programar as componentes do projeto [75%]
 *** DONE Implementar as funções matemáticas de teste
 *** DONE Implementar o algoritmo sequencial do cálculo de área
 *** DONE Implementar o algoritmo concorrente
     CLOSED: [2019-10-23 qua 22:51] SCHEDULED: <2019-10-22 ter>
-*** NEXT Implementar a interface de uso
+*** NOW [#A] Implementar a interface de uso
     SCHEDULED: <2019-10-22 ter>
 ** TODO Testes, avaliações e relatório [0%]
-*** TODO Efetuar os testes e medições de tempo
+*** NOW [#B] Efetuar os testes e medições de tempo
     SCHEDULED: <2019-10-23 qua>
 **** Se necessário, reavaliar a implementação
-*** TODO Avaliar o ganho obtido com a concorrência
+*** NOW [#B] Avaliar o ganho obtido com a concorrência
     SCHEDULED: <2019-10-23 qua>
 *** TODO Documentar o código
     SCHEDULED: <2019-10-23 qua>
