@@ -7,7 +7,7 @@ void p_init(pilha_t **p) {
   (*p)->tamanho = 0;
 }
 
-int p_vazia(pilha_t **p) { return !((*p)->tamanho); }
+int p_vazia(pilha_t *p) { return !(p->tamanho); }
 
 no_t *novo_no(tarefa_t t) {
   no_t *novo = (no_t *)malloc(sizeof(no_t));
@@ -16,22 +16,27 @@ no_t *novo_no(tarefa_t t) {
   return novo;
 }
 
-void p_insere(pilha_t **p, tarefa_t t) {
+void p_insere(pilha_t *p, tarefa_t t) {
   no_t *in = novo_no(t);
-  in->proximo = (*p)->topo;
-  (*p)->topo = in;
-  (*p)->tamanho++;
+  in->proximo = p->topo;
+  p->topo = in;
+  p->tamanho++;
 }
 
-tarefa_t p_retira(pilha_t **p) {
+tarefa_t p_retira(pilha_t *p) {
   tarefa_t t;
   if (p_vazia(p)) {
     exit(-1);
   }
-  no_t *temp = (*p)->topo;
-  (*p)->topo = (*p)->topo->proximo;
+  no_t *temp = p->topo;
+  p->topo = p->topo->proximo;
   t = temp->t;
   free(temp);
-  (*p)->tamanho--;
+  p->tamanho--;
   return t;
+}
+
+void p_destroi(pilha_t *p) {
+  while(p->topo) p_retira(p);
+  free(p);
 }

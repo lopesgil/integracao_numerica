@@ -15,10 +15,10 @@ typedef struct pilha {
 } pilha_t;
 
 void p_init(pilha_t **);
-void p_cheia(pilha_t **);
-int p_vazia(pilha_t **);
-void p_insere(pilha_t **, tarefa_t);
-tarefa_t p_retira(pilha_t **);
-void p_destroi(pilha_t **);
+void p_cheia(pilha_t *);
+int p_vazia(pilha_t *);
+void p_insere(pilha_t *, tarefa_t);
+tarefa_t p_retira(pilha_t *);
+void p_destroi(pilha_t *);
 
 #endif
