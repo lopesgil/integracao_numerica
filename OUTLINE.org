@@ -1,6 +1,5 @@
 #+TITLE: Trabalho de Integração Numérica
-#+TODO: TODO(t) NEXT(n) NOW(w) | DONE(d)
-* NOW Tarefas [66%]
+* DOING Tarefas [66%]
   DEADLINE: <2019-10-25 sex>
 ** DONE Planejar a estrutura do projeto [100%]
    CLOSED: [2019-10-24 qui 16:43]
@@ -24,8 +23,8 @@
 **** Se necessário, reavaliar a implementação
 *** DONE [#B] Avaliar o ganho obtido com a concorrência
     CLOSED: [2019-10-24 qui 16:43] SCHEDULED: <2019-10-23 qua>
-*** NOW Refatorar o código visando melhora no desempenho
+*** DOING Refatorar o código visando melhora no desempenho
 *** TODO Documentar o código
-    SCHEDULED: <2019-10-23 qua>
+    SCHEDULED: <2019-10-26 sáb>
 *** TODO Redigir o relatório
-    SCHEDULED: <2019-10-23 qua>
+    SCHEDULED: <2019-10-26 sáb>
