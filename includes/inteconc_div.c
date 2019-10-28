@@ -4,6 +4,7 @@
 #include "utils.h"
 #include "inteconc_div.h"
 
+// Estrutura para representação das tarefas iniciais das threads
 typedef struct tarefa {
   double l;
   double r;
@@ -11,12 +12,12 @@ typedef struct tarefa {
 
 tarefa_t *tarefas_iniciais;
 
-pthread_mutex_t m_total;
-
+// áreas parciais calculadas pelas threads, erro máximo e função a ser integrada
 double *areas_threads;
 double e;
 double (*func)(double);
 
+// Função recursiva de quadratura, idêntica ao algoritmo sequencial
 double quadratura_div(double l, double r) {
   double q, lq, rq, m;
   double erro;
@@ -34,18 +35,22 @@ double quadratura_div(double l, double r) {
   return q;
 }
 
+// Função de execução das threads
 void *integra_div(void *arg) {
   int id = * (int *) arg;
   double area_thread;
   tarefa_t tarefa = tarefas_iniciais[id];
 
+  // Cada thread chama a função de quadratura a partir do seu intervalo inicial
+  // Ao final, guardam o resultado no vetor designado para os resultados parciais
   area_thread = quadratura_div(tarefa.l, tarefa.r);
-  areas_threads[id] += area_thread;
+  areas_threads[id] = area_thread;
 
   free(arg);
   pthread_exit(NULL);
 }
 
+// Função envelope da lógica concorrente
 double integral_conc_div(int nThreads, double a, double b, double erro, double (*f)(double)) {
   pthread_t *sys_tids;
   int t;
@@ -53,11 +58,12 @@ double integral_conc_div(int nThreads, double a, double b, double erro, double (
   double divisao;
   double area_total = 0;
 
+  // Inicializa os valores globais usados pelas threads
   e = erro;
   func = f;
-
   areas_threads = (double *) malloc(sizeof(double) * nThreads);
 
+  // Divide o intervalo inicial em subintervalos para cada uma das threads
   divisao = (b - a) / nThreads;
   tarefas_iniciais = (tarefa_t *) malloc(sizeof(tarefa_t) * nThreads);
   for (t = 0; t < nThreads; t++) {
@@ -65,6 +71,7 @@ double integral_conc_div(int nThreads, double a, double b, double erro, double (
     tarefas_iniciais[t].r = a + ((t+1) * divisao);
   }
 
+  // Dispara as threads
   sys_tids = (pthread_t *) malloc(sizeof(pthread_t) * nThreads);
   for (t = 0; t < nThreads; t++) {
     tid = (int *) malloc(sizeof(int));
@@ -72,11 +79,13 @@ double integral_conc_div(int nThreads, double a, double b, double erro, double (
     pthread_create(&sys_tids[t], NULL, integra_div, (void *) tid);
   }
 
+  // Ao término de cada thread, soma o seu resultado parcial ao resultado geral
   for (t = 0; t < nThreads; t++) {
     pthread_join(sys_tids[t], NULL);
     area_total += areas_threads[t];
   }
 
+  // Libera a memória usada e retorna o resultado encontrado
   free(areas_threads);
   free(sys_tids);
   free(tarefas_iniciais);
