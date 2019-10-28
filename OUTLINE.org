@@ -1,6 +1,6 @@
 #+TITLE: Trabalho de Integração Numérica
 * DOING Tarefas [66%]
-  DEADLINE: <2019-10-25 sex>
+  DEADLINE: <2019-10-29 ter>
 ** DONE Planejar a estrutura do projeto [100%]
    CLOSED: [2019-10-24 qui 16:43]
 *** DONE Mapear as funções matemáticas em funções do C
