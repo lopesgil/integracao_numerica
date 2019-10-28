@@ -1,0 +1,1 @@
+#+TITLE: Integração Numérica com Quadratura Adaptativa
