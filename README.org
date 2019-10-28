@@ -1,1 +1,23 @@
-# integracao_numerica
+#+TITLE: Trabalho de Integração Numérica com Quadratura Adaptativa
+
+* Motivação
+  O trabalho consiste na implementação de um algoritmo concorrente que
+  calcule a integral numérica de uma função usando a Regra do Ponto Médio,
+  com a estratégia de quadratura adpatativa.
+
+  A regra se baseia no cálculo da área do retângulo delimitado pelo
+  intervalo[a, b], com altura f(x) calculada no ponto médio do intervalo.
+  Ao se dividir o problema em um numero suficientemente grande de subproblemas,
+  obtém-se uma boa aproximação da integral.
+  
+  A estratégia de quadratura adaptativa é usada quando, ao invés de se fixar
+  um número de divisões, os seguintes passos são efetuados:
+  
+1. Calcula-se a área original, com base no intervalo [a, b] e altura dada
+   por f(m), sendo m o ponto médio.
+2. Divide-se o intervalo original em dois, e calcula-se a área nestes dois
+   subintervalos [a, m] e [m, b], com altura em seus respectivos pontos médios.
+3. Compara-se a área original com a soma das áreas dos subproblemas. Se a
+   diferença entre elas for suficientemente pequena, considera-se a área maior
+   uma boa aproximação. Caso contrário, o processo é repetido recursivamente
+   nos subintervalos.
