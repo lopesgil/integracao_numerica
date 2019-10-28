@@ -17,14 +17,21 @@
     CLOSED: [2019-10-23 qua 22:51] SCHEDULED: <2019-10-22 ter>
 *** DONE [#A] Implementar a interface de uso
     CLOSED: [2019-10-24 qui 16:43] SCHEDULED: <2019-10-22 ter>
-** TODO Testes, avaliações e relatório [40%]
+** TODO Testes, avaliações e relatório [60%]
 *** DONE [#B] Efetuar os testes e medições de tempo
     CLOSED: [2019-10-24 qui 16:43] SCHEDULED: <2019-10-23 qua>
 **** Se necessário, reavaliar a implementação
 *** DONE [#B] Avaliar o ganho obtido com a concorrência
     CLOSED: [2019-10-24 qui 16:43] SCHEDULED: <2019-10-23 qua>
-*** DOING Refatorar o código visando melhora no desempenho
-*** TODO Documentar o código
+*** DONE Refatorar o código visando melhora no desempenho
+    CLOSED: [2019-10-27 dom 22:58]
+*** DOING Documentar o código [/]
     SCHEDULED: <2019-10-26 sáb>
+    - [ ] funcs
+    - [ ] inteconc
+    - [ ] inteconc_div
+    - [ ] inteseq
+    - [ ] pilha
+    - [ ] utils
 *** TODO Redigir o relatório
     SCHEDULED: <2019-10-26 sáb>
