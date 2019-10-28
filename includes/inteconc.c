@@ -14,15 +14,15 @@ typedef struct inicio {
 dados_t dados_iniciais;
 
 // Variáveis usadas na sincronização do acesso aos dados
-pthread_mutex_t m_pilha, m_total;
+pthread_mutex_t m_pilha;
 pthread_cond_t c_tamanho;
 
 // Outras variáveis globais usadas no algoritmo para determinar a condição de parada
-int inativos = 0;
+int inativos;
 int numThreads;
 
-// Acumulador da área total
-double area_atual = 0;
+// Vetor para os resultados parciais das threads
+double *areas_threads;
 
 // Pilha usada para a comunicação de tarefas entre as threads
 pilha_t *p_tarefas;
@@ -100,10 +100,8 @@ void *integra(void *arg) {
     }
   }
 
-  pthread_mutex_lock(&m_total);
-  // soma o resultado parcial da thread ao valor global
-  area_atual += q_total;
-  pthread_mutex_unlock(&m_total);
+  // armazena o resultado parcial no vetor global
+  areas_threads[id] = q_total;
 
   free(arg);
   pthread_exit(NULL);
@@ -115,10 +113,12 @@ double integral_conc(int nthreads, double a, double b, double e, double (*f)(dou
   int *tid;
   int t;
   tarefa_t tarefa_inicial;
+  double area_total = 0;
 
-  // Inicializa os valores globais fixos
+  // Inicializa os valores globais iniciais ou fixos
   dados_iniciais.e = e;
   dados_iniciais.f = f;
+  inativos = 0;
 
   // Inicializa a pilha
   p_init(&p_tarefas);
@@ -127,7 +127,6 @@ double integral_conc(int nthreads, double a, double b, double e, double (*f)(dou
 
   // Inicializa os mutex
   pthread_mutex_init(&m_pilha, NULL);
-  pthread_mutex_init(&m_total, NULL);
 
   // Calcula a tarefa baseada no intervalo inicial, que será empilhada para iniciar a lógica das threads
   tarefa_inicial.area_maior = area(a, b, f);
@@ -136,6 +135,9 @@ double integral_conc(int nthreads, double a, double b, double e, double (*f)(dou
 
   // Empilha a tarefa inicial
   p_insere(p_tarefas, tarefa_inicial);
+
+  // Inicializa o vetor dos retultados parciais
+  areas_threads = (double *) malloc(sizeof(double) * nthreads);
 
   // Dispara as threads
   sys_tids = (pthread_t *) malloc(sizeof(pthread_t) * nthreads);
@@ -148,14 +150,15 @@ double integral_conc(int nthreads, double a, double b, double e, double (*f)(dou
   // Aguarda o término das threads
   for(t = 0; t < nthreads; t++) {
     if(pthread_join(sys_tids[t], NULL)) exit(-1);
+    area_total += areas_threads[t];
   }
 
   // Libera a memória alocada e as estruturas usadas
   pthread_mutex_destroy(&m_pilha);
-  pthread_mutex_destroy(&m_total);
 
   p_destroi(p_tarefas);
 
+  free(areas_threads);
   free(sys_tids);
-  return area_atual;
+  return area_total;
 }
