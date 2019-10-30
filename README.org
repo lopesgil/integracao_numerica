@@ -23,9 +23,9 @@
    nos subintervalos.
 
 * Compilando
-  Para compilar a bateria de testes, basta-se executar:
+  Para compilar a bateria de testes, basta-se executar: \\
   ~gcc includes/*.c testes.c -lpthread -lm -Wall -o testes.out~
   
   Para compilar os testes de cada função individal, o comando é análogo,
-  substituindo-se apenas o arquivo da aplicação e o nome de saída:
+  substituindo-se apenas o arquivo da aplicação e o nome de saída: \\
   ~gcc includes/*.c f_a.c -lpthread -lm -Wall -o f_a.out~
