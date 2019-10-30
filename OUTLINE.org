@@ -1,6 +1,9 @@
 #+TITLE: Trabalho de Integração Numérica
-* DOING Tarefas [66%]
-  DEADLINE: <2019-10-29 ter>
+* DONE Tarefas [100%]
+  CLOSED: [2019-10-29 ter 23:27] DEADLINE: <2019-10-29 ter>
+  :PROPERTIES:
+  :COOKIE_DATA: todo recursive
+  :END:
 ** DONE Planejar a estrutura do projeto [100%]
    CLOSED: [2019-10-24 qui 16:43]
 *** DONE Mapear as funções matemáticas em funções do C
@@ -17,7 +20,8 @@
     CLOSED: [2019-10-23 qua 22:51] SCHEDULED: <2019-10-22 ter>
 *** DONE [#A] Implementar a interface de uso
     CLOSED: [2019-10-24 qui 16:43] SCHEDULED: <2019-10-22 ter>
-** TODO Testes, avaliações e relatório [80%]
+** DONE Testes, avaliações e relatório [100%]
+   CLOSED: [2019-10-29 ter 23:27]
 *** DONE [#B] Efetuar os testes e medições de tempo
     CLOSED: [2019-10-24 qui 16:43] SCHEDULED: <2019-10-23 qua>
 **** Se necessário, reavaliar a implementação
@@ -36,5 +40,5 @@
     - [X] inteseq
     - [X] pilha
     - [X] utils
-*** TODO [#A] Redigir o relatório
-    SCHEDULED: <2019-10-26 sáb>
+*** DONE [#A] Redigir o relatório
+    CLOSED: [2019-10-29 ter 23:27] SCHEDULED: <2019-10-26 sáb>
